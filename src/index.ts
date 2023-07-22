@@ -1,1 +1,1 @@
-console.log('howdy');
+import './shared/infra/http/app';
