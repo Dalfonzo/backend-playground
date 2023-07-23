@@ -10,9 +10,7 @@ export class CreateProductUseCase {
 
   async execute(dto: CreateProductDTO) {
     // Validations: Check if we are going to use some Either|Result class
-
     const product = await this.productRepo.create(dto);
-    console.log({ product, dto });
     return product;
   }
 }

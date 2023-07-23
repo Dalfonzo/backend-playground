@@ -14,7 +14,6 @@ export class CreateProductController {
     try {
       const result = await this.createProductUseCase.execute(dto);
       // TODO: Change this
-      console.log({ result, dto });
       return res.status(200).json(result);
     } catch (error) {
       console.error(error);
