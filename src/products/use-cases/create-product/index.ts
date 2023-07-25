@@ -6,4 +6,4 @@ const sequelizeProductRepo = new SequelizeProductRepo();
 const createProductUseCase = new CreateProductUseCase(sequelizeProductRepo);
 const createProductController = new CreateProductController(createProductUseCase);
 
-export { createProductUseCase, createProductController };
+export { createProductController };
