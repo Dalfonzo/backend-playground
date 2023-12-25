@@ -26,18 +26,12 @@ export class SequelizeProductRepo implements IProductRepo {
     return { id };
   }
 
-  async readById({ id }: ReadProductByIdDTO): Promise<CreateProductDTO> {
-    const product = await Product.findOne({
+  async readById({ id }: ReadProductByIdDTO): Promise<CreateProductDTO | null> {
+    return await Product.findOne({
       where: {
         id: id,
       },
     });
-
-    if (!product) {
-      throw new Error('no product exists');
-    }
-
-    return product;
   }
 
   async update(dto: UpdateProductDTO): Promise<CreateProductDTO> {
@@ -49,7 +43,7 @@ export class SequelizeProductRepo implements IProductRepo {
     });
 
     if (!product) {
-      throw new Error('no product exists');
+      throw new Error('Product id does not exists');
     }
 
     await product.update({ ...product, ...rest }, { where: { id } });

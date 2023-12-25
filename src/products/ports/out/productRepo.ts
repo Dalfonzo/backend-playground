@@ -6,7 +6,7 @@ import { UpdateProductDTO } from '../../use-cases/update-product/updateProductDT
 export interface IProductRepo {
   create(product: CreateProductDTO): Promise<CreateProductDTO>;
   readAll(): Promise<CreateProductDTO[]>;
-  readById(id: ReadProductByIdDTO): Promise<CreateProductDTO>;
+  readById(id: ReadProductByIdDTO): Promise<CreateProductDTO | null>;
   update(id: UpdateProductDTO): Promise<CreateProductDTO>;
   delete(id: DeleteProductDTO): Promise<DeleteProductDTO>;
 }

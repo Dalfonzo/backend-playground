@@ -1,5 +1,6 @@
 import { UpdateProductUseCase } from './updateProductUseCase';
 import { Response, Request } from 'express';
+import { GeneralErrors } from '../../../shared/core/GeneralErrors';
 
 export class UpdateProductController {
   private updateProductUseCase: UpdateProductUseCase;
@@ -12,10 +13,15 @@ export class UpdateProductController {
     const id = req.params.id as string;
     try {
       const result = await this.updateProductUseCase.execute({ id, ...req.body });
-      // TODO: Change this
-      return res.status(200).json(result);
+
+      if (result.isSuccess) {
+        return res.status(200).json({ code: 200, data: result.getValue() });
+      }
+
+      return res.status(result.getCode()).json({ message: result.getError(), code: result.getCode() });
     } catch (error) {
-      console.error(error);
+      const { code, message } = new GeneralErrors().InternalServerError();
+      return res.status(code).json({ code, message });
     }
   }
 }

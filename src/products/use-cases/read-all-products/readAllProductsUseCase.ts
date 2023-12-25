@@ -1,3 +1,5 @@
+import { GeneralErrors } from '../../../shared/core/GeneralErrors';
+import { Result } from '../../../shared/core/Result';
 import { IProductRepo } from '../../ports/out/productRepo';
 
 export class ReadAllProductsUseCase {
@@ -8,7 +10,11 @@ export class ReadAllProductsUseCase {
   }
 
   async execute() {
-    // Validations: Check if we are going to use some Either|Result class
-    return await this.productRepo.readAll();
+    try {
+      const products = await this.productRepo.readAll();
+      return Result.ok(products);
+    } catch (error) {
+      return Result.fail(new GeneralErrors().InternalServerError());
+    }
   }
 }
