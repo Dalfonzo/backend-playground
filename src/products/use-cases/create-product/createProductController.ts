@@ -16,7 +16,7 @@ export class CreateProductController {
       const result = await this.createProductUseCase.execute(dto);
 
       if (result.isSuccess) {
-        return res.status(200).json({ code: 200, data: result.getValue() });
+        return res.status(201).json({ code: 201, data: result.getValue() });
       }
       return res.status(result.getCode()).json({ message: result.getError(), code: result.getCode() });
     } catch (error) {

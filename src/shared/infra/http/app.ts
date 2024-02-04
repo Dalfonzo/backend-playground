@@ -3,6 +3,8 @@ import express from 'express';
 import { v1Router } from './api/v1';
 import bodyParser from 'body-parser';
 import { sequelize } from '../database/sequelize';
+import { swaggerDocs } from '../docs/swagger';
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -15,5 +17,6 @@ sequelize
   })
   .catch((e) => console.error('There was an error with Sequelize:', e));
 app.listen(3000, '127.0.0.1', () => {
+  swaggerDocs(app);
   console.log('Listening on port 3000');
 });
